@@ -1,6 +1,6 @@
 ##########################
 import flask
-from flask import request, jsonify, send_from_directory, send_file
+from flask import request, jsonify, send_from_directory, send_file, redirect
 import numpy as np
 # importing Qiskit
 from qiskit.providers.ibmq import least_busy
@@ -32,7 +32,7 @@ app.register_blueprint(swagger_ui_blueprint, url_prefix=swagger_url)
 
 @app.route('/', methods=['GET'])
 def home():
-    return jsonify({'response': 'hello'})
+    return redirect('/home')
 
 
 @app.route('/demo/get_oracle',methods=['GET'])
