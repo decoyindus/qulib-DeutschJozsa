@@ -1,0 +1,113 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Bernstein-Vazirani algorithm",
+    "description": "The Bernstein-Vazirani algorithm can be seen as an extension of the Deutsch-Jozsa algorithm. It showed that there can be advantages in using a quantum computer as a computational tool for more complex problems than the Deutsch-Jozsa problem. <br> We are again given a black-box function <b>f</b>, which takes as input a string of bits (<b>x</b>), and returns either 0 or 1. Instead of the function being balanced or constant as in the Deutsch-Jozsa problem, now the function is guaranteed to return the bitwise product of the input with some string, s. In other words, given an input <b>x</b>, <b>f(x)=s⋅x(mod 2)</b>."
+  },
+  "paths": {
+    "/demo/get_BV_oracle": {
+      "get": {
+        "tags": [
+          "Get a custom oracle circuit for Bernstein-Vazirani algorithm."
+        ],
+        "description": "Provides a custom qiskit.QuantumCircuit of the required specifications, in string format. User should input exactly one of the fields, either key, or qubits.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "key",
+            "required": false,
+            "description": "A binary bit-string which acts as the hidden key of the oracle function.",
+            "schema": {
+              "type": "string",
+              "example": "00111"
+            }
+          },
+          {
+            "in": "query",
+            "name": "qubits",
+            "required": false,
+            "description": "Number of qubits required to build the oracle circuit.",
+            "schema": {
+              "type": "integer",
+              "example": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the quantum circuit for the Bernstein-Vazirani algorithm in string format, along with the key."
+          }
+        }
+      }
+    },
+    "/demo/get_BV_key": {
+      "get": {
+        "tags": [
+          "Find the key bit-string of orarcle using Bernstein-Vazirani algorithm."
+        ],
+        "description": "Implement Bernstein-Vazirani algorithm to find the key bit-string of the given circuit.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "oracle",
+            "required": true,
+            "description": "The quantum circuit of our oracle function, in string format.",
+            "schema": {
+              "type": "string",
+              "example": "UUlTS0lUAwATAQAAAA...."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Applies Bernstein-Vazirani algorithm on the circuit and returns the hidden key bitstring."
+          }
+        }
+      }
+    },
+    "/BVazirani": {
+      "get": {
+        "tags": [
+          "Apply Bernstein-Vazirani Algorithm on bitmap."
+        ],
+        "description": "Implement Bernstein-Vazirani algorithm to find the key bit-string of a given oracle function, represented using a truth-table bitmap.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "bitmap",
+            "required": true,
+            "description": "Input truth-table of oracle fuction in bitmap format.",
+            "schema": {
+              "type": "string",
+              "example": "01101001"
+            }
+          },
+          {
+            "in": "query",
+            "name": "api_key",
+            "required": true,
+            "description": "API key for IBM-Q Quantum Experience Cloud access.",
+            "schema": {
+              "type": "string",
+              "example": "Enter API key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Applies Bernstein-Vazirani algorithm on the bitmap and returns the hidden key of corresponding oracle function. ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "000"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

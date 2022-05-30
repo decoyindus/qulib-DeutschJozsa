@@ -1,0 +1,130 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Deutsch–Jozsa algorithm",
+    "description": "The Deutsch-Jozsa algorithm was the first example of a quantum algorithm that performs better than the best classical algorithm. It showed that there can be advantages to using a quantum computer as a computational tool for a specific problem.<br> We are given a hidden Boolean function f, which takes as input a string of bits, and returns either 0 or 1. The property of the given Boolean function is that it is guaranteed to either be balanced or constant. A constant function returns all 0s or all 1s for any input, while balanced returns 0s for exactly half of the inputs, and 1s for the other half. Using the Deutsch-Jozsa algorithm, the question can be answered with just one function evaluation."
+  },
+  "paths": {
+    "/demo/get_oracle": {
+      "get": {
+        "tags": [
+          "Get a custom oracle circuit for Deutsch-Jozsa algorithm."
+        ],
+        "description": "Provides a custom qiskit.QuantumCircuit of the required specifications, in string format.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "n",
+            "required": true,
+            "description": "Number of qubits required in the circuit.",
+            "schema": {
+              "type": "integer",
+              "example": 3
+            }
+          },
+          {
+            "in": "query",
+            "name": "case",
+            "required": true,
+            "description": "The type of oracle function required, 'b' for balanced and 'c' for constant.",
+            "schema": {
+              "type": "string",
+              "example": "b"
+            }
+          }
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the quantum circut for the Deutsch-Jozsa algorithm algorithm in string format.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "UUlTS0lUAwATAQAAAAAAAAABAAlpAAgAAAAGAAAABgAAAAAAAAAEAAAAAgAAAAAAAAAiY2lyY3VpdC05AAAAAAAAAABudWxscQEAAAAGAAFxAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFYwEAAAAGAAFjAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAAAAAAAAAABQAAAAAAAAABAAAAAAAAAAAAAAAAAAAASEdhdGVxAAAAAAAFAAAAAAAAAAEAAAAAAAAAAAAAAAAAAABIR2F0ZXEAAAABAAUAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAEhHYXRlcQAAAAIABQAAAAAAAAABAAAAAAAAAAAAAAAAAAAASEdhdGVxAAAAAwAFAAAAAAAAAAEAAAAAAAAAAAAAAAAAAABIR2F0ZXEAAAAEAAUAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAFhHYXRlcQAAAAUABQAAAAAAAAABAAAAAAAAAAAAAAAAAAAASEdhdGVxAAAABQAHAAAAAAAAAAYAAAAAAAAAAAAAAAAAAABCYXJyaWVycQAAAABxAAAAAXEAAAACcQAAAANxAAAABHEAAAAFAAUAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAFhHYXRlcQAAAAEABQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAWEdhdGVxAAAAAgAFAAAAAAAAAAEAAAAAAAAAAAAAAAAAAABYR2F0ZXEAAAADAAUAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAFhHYXRlcQAAAAQABgAAAAAAAAACAAAAAAAAAAAAAAAAAAAAQ1hHYXRlcQAAAABxAAAABQAGAAAAAAAAAAIAAAAAAAAAAAAAAAAAAABDWEdhdGVxAAAAAXEAAAAFAAYAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAENYR2F0ZXEAAAACcQAAAAUABgAAAAAAAAACAAAAAAAAAAAAAAAAAAAAQ1hHYXRlcQAAAANxAAAABQAGAAAAAAAAAAIAAAAAAAAAAAAAAAAAAABDWEdhdGVxAAAABHEAAAAFAAUAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAFhHYXRlcQAAAAEABQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAWEdhdGVxAAAAAgAFAAAAAAAAAAEAAAAAAAAAAAAAAAAAAABYR2F0ZXEAAAADAAUAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAFhHYXRlcQAAAAQABwAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAQmFycmllcnEAAAAAcQAAAAFxAAAAAnEAAAADcQAAAARxAAAABQAFAAAAAAAAAAEAAAAAAAAAAAAAAAAAAABIR2F0ZXEAAAAAAAcAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAE1lYXN1cmVxAAAAAGMAAAAAAAUAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAEhHYXRlcQAAAAEABwAAAAAAAAABAAAAAQAAAAAAAAAAAAAATWVhc3VyZXEAAAABYwAAAAEABQAAAAAAAAABAAAAAAAAAAAAAAAAAAAASEdhdGVxAAAAAgAHAAAAAAAAAAEAAAABAAAAAAAAAAAAAABNZWFzdXJlcQAAAAJjAAAAAgAFAAAAAAAAAAEAAAAAAAAAAAAAAAAAAABIR2F0ZXEAAAADAAcAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAE1lYXN1cmVxAAAAA2MAAAADAAUAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAEhHYXRlcQAAAAQABwAAAAAAAAABAAAAAQAAAAAAAAAAAAAATWVhc3VyZXEAAAAEYwAAAAQABQAAAAAAAAABAAAAAAAAAAAAAAAAAAAASEdhdGVxAAAABQAHAAAAAAAAAAEAAAABAAAAAAAAAAAAAABNZWFzdXJlcQAAAAVjAAAABQ=="
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/demo/get_type": {
+      "get": {
+        "tags": [
+          "Find the type of orarcle using Deutsch-Jozsa algorithm."
+        ],
+        "description": "Implement Deutsch-Jozsa algorithm to find whether the given circuit represents a balanced function or a constant function, given that its one of them.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "circuit",
+            "required": true,
+            "description": "The quantum circuit of our oracle function, in string format",
+            "schema": {
+              "type": "string",
+              "example": "UUlTS0lUAwATAQAAAAAAAAABAAlpAAgAAAAGAAAABgAAAAAAAAAEAAAAAgAAAAAAAAAiY2lyY3VpdC05AAAAAAAAAABudWxscQEAAAAGAAFxAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFYwEAAAAGAAFjAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAAAAAAAAAABQAAAAAAAAABAAAAAAAAAAAAAAAAAAAASEdhdGVxAAAAAAAFAAAAAAAAAAEAAAAAAAAAAAAAAAAAAABIR2F0ZXEAAAABAAUAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAEhHYXRlcQAAAAIABQAAAAAAAAABAAAAAAAAAAAAAAAAAAAASEdhdGVxAAAAAwAFAAAAAAAAAAEAAAAAAAAAAAAAAAAAAABIR2F0ZXEAAAAEAAUAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAFhHYXRlcQAAAAUABQAAAAAAAAABAAAAAAAAAAAAAAAAAAAASEdhdGVxAAAABQAHAAAAAAAAAAYAAAAAAAAAAAAAAAAAAABCYXJyaWVycQAAAABxAAAAAXEAAAACcQAAAANxAAAABHEAAAAFAAUAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAFhHYXRlcQAAAAEABQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAWEdhdGVxAAAAAgAFAAAAAAAAAAEAAAAAAAAAAAAAAAAAAABYR2F0ZXEAAAADAAUAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAFhHYXRlcQAAAAQABgAAAAAAAAACAAAAAAAAAAAAAAAAAAAAQ1hHYXRlcQAAAABxAAAABQAGAAAAAAAAAAIAAAAAAAAAAAAAAAAAAABDWEdhdGVxAAAAAXEAAAAFAAYAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAENYR2F....."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Applies Deutsch-Jozsa algorithm on the circuit and returns whether the oracle function is constant or balanced, given that it is one of them.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "balanced"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/d_josza": {
+      "get": {
+        "tags": [
+          "Apply Deutsch-Jozsa Algorithm on a bitmap."
+        ],
+        "description": "Implement Deutsch-Jozsa algorithm to find whether a given oracle function is balanced or constant, given that it is one of them.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "bitmap",
+            "required": true,
+            "description": "Input truth-table of oracle fuction in bitmap format.",
+            "schema": {
+              "type": "string",
+              "example": "0100111100001011"
+            }
+          },
+          {
+            "in": "query",
+            "name": "key",
+            "required": true,
+            "description": "API key for IBM-Q Quantum Experience Cloud access.",
+            "schema": {
+              "type": "string",
+              "example": "Enter API key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Applies Deutsch-Jozsa algorithm on the bitmap and predicts the type of oracle function. ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "balanced"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
